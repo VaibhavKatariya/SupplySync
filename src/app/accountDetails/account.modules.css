@@ -1,0 +1,24 @@
+/* account.module.css */
+input:focus:invalid {
+    border: 2px solid red;
+  }
+
+  .name-input:focus:invalid + .name-error-message {
+    display: block;
+    color: red;
+    font-size: 12px;
+  }
+
+  .phone-input:focus:invalid + .phone-error-message {
+    display: block;
+    color: red;
+    font-size: 12px;
+  }
+  
+  .error-message {
+    display: none;
+  }
+  
+  input:focus:valid {
+    border: 2px solid green; 
+  }

@@ -1,0 +1,8 @@
+/* Signin.module.css */
+input:focus:invalid {
+    border: 2px solid red;
+  }
+  
+  input:focus:valid {
+    border: 2px solid green; 
+  }
