@@ -1,16 +1,48 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from '../firebase/config';
+import { auth, db } from '../firebase/config';
 import { useRouter } from 'next/navigation'
 import { IconFidgetSpinner } from '@tabler/icons-react'
-
+import Breadcrum from './components/Breadcrum';
+import Tables from './components/Tables';
+import AddModal from './components/addModal';
+import UpdateModal from './components/updateModal';
+import { collection, query, getDocs } from 'firebase/firestore';
 
 function Page() {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
+  const [productList, setProductList] = useState([]);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      if (user) {
+        const userId = user.uid;
+        const productsRef = collection(db, `products/${userId}/userProducts`);
+        const q = query(productsRef);
+        const querySnapshot = await getDocs(q);
+        let products = [];
+
+        querySnapshot.forEach((doc) => {
+          products.push({ id: doc.id, ...doc.data() });
+        });
+
+        setProductList(products);
+        setIsLoadingProducts(false);
+      }
+    };
+
+    if (user) {
+      fetchProducts();
+    }
+  }, [user]);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -18,7 +50,43 @@ function Page() {
     }
   }, [loading, user, router]);
 
-  if (loading) {
+  const openAddModal = () => {
+    setIsAddModalOpen(true);
+  };
+
+  const closeAddModal = () => {
+    setIsAddModalOpen(false);
+  };
+
+  const openUpdateModal = (product) => {
+    setCurrentProduct(product);
+    setIsUpdateModalOpen(true);
+  };
+
+  const closeUpdateModal = () => {
+    setIsUpdateModalOpen(false);
+    setCurrentProduct(null);
+  };
+
+  const refreshProducts = async () => {
+    const userId = user.uid;
+    const productsRef = collection(db, `products/${userId}/userProducts`);
+    const q = query(productsRef);
+    const querySnapshot = await getDocs(q);
+    let products = [];
+
+    querySnapshot.forEach((doc) => {
+      products.push({ id: doc.id, ...doc.data() });
+    });
+
+    setProductList(products);
+  };
+
+  const handleProductUpdate = async () => {
+    await refreshProducts();
+  };
+
+  if (loading || isLoadingProducts) {
     return (
       <>
         <Header page="home" />
@@ -28,17 +96,50 @@ function Page() {
     );
   }
 
-  if (user) {
-    return (
-      <>
-        <Header page="dashboard" />
-        
-        <Footer />
-      </>
-    );
-  }
+  return (
+    <>
+      <Header page="dashboard" />
+      <Breadcrum />
+      <div className="min-h-screen bg-[#1f2937] text-white rounded-md">
+        <div className="container mx-auto px-4 py-8">
+          <h1 className="text-3xl font-bold mb-6">Product Dashboard</h1>
+          <p className='p-2'>Hi {user.displayName}! Here is a list of your products:</p>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
+            onClick={openAddModal}
+          >
+            Add Product
+          </button>
+          {productList.length === 0 ? (
+            <div className="text-center mt-4">
+              <p className="text-lg">No products, start by adding one!</p>
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                onClick={openAddModal}
+              >
+                Add Product
+              </button>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <Tables productList={productList} onEdit={openUpdateModal} />
+            </div>
+          )}
+        </div>
+      </div>
 
-  return null;
+      <AddModal isOpen={isAddModalOpen} closeModal={closeAddModal} user={user} onAdd={refreshProducts} />
+      {currentProduct && (
+        <UpdateModal 
+          isOpen={isUpdateModalOpen} 
+          closeModal={closeUpdateModal} 
+          product={currentProduct} 
+          onUpdate={handleProductUpdate} 
+        />
+      )}
+      <Footer />
+    </>
+  );
 }
 
 export default Page;

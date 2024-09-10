@@ -35,7 +35,8 @@ const SignUp = () => {
   const isEmailValid = email.endsWith('@mail.jiit.ac.in');
   const isPasswordValid = password.length >= 6 && password.length <= 20;
 
-  const handleSignUp = async () => {
+  const handleSignUp = async (e) => {
+    e.preventDefault();
     setError("");
     if (!isEmailValid) {
       setError('Please use a valid @mail.jiit.ac.in email address.');
@@ -68,7 +69,7 @@ const SignUp = () => {
     return (
       <>
         <Header button="home" />
-        <IconFidgetSpinner className='animate-spin w-12 min-h-screen mx-auto'/>
+        <IconFidgetSpinner className='animate-spin w-12 min-h-screen mx-auto' />
         <Footer />
       </>
     );
@@ -81,36 +82,38 @@ const SignUp = () => {
         <div className="min-h-screen flex items-center justify-center bg-gray-900">
           <div className="bg-gray-800 p-10 rounded-lg shadow-xl w-96">
             <h1 className="text-white text-2xl mb-5">Sign Up</h1>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 mb-4 bg-gray-700 rounded outline-none text-white placeholder-gray-500"
-            />
-            <div className="relative w-full mb-4">
+            <form onSubmit={handleSignUp}>
               <input
-                type={showPassword ? 'text' : 'password'} // Toggle between 'text' and 'password'
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-3 bg-gray-700 rounded outline-none text-white placeholder-gray-500"
-                minLength={6} maxLength={12}
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full p-3 mb-4 bg-gray-700 rounded outline-none text-white placeholder-gray-500"
               />
-              <span
-                onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
-                className="absolute right-3 top-3 cursor-pointer text-gray-400"
+              <div className="relative w-full mb-4">
+                <input
+                  type={showPassword ? 'text' : 'password'} // Toggle between 'text' and 'password'
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full p-3 bg-gray-700 rounded outline-none text-white placeholder-gray-500"
+                  minLength={6} maxLength={12}
+                />
+                <span
+                  onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+                  className="absolute right-3 top-3 cursor-pointer text-gray-400"
+                >
+                  {showPassword ? <IconEyeOff /> : <IconEye />}
+                </span>
+              </div>
+              <button
+                type='submit'
+                className="w-full p-3 bg-indigo-600 rounded text-white hover:bg-indigo-500"
+                disabled={loading}
               >
-                {showPassword ? <IconEyeOff /> : <IconEye />}
-              </span>
-            </div>
-            <button
-              onClick={handleSignUp}
-              className="w-full p-3 bg-indigo-600 rounded text-white hover:bg-indigo-500"
-              disabled={loading}
-            >
-              {loading ? 'Signing Up...' : 'Sign Up'}
-            </button>
+                {loading ? 'Signing Up...' : 'Sign Up'}
+              </button>
+            </form>
             <div className='p-2 text-center'>
               Already have an Account?
               <Link legacyBehavior href="/sign-in">

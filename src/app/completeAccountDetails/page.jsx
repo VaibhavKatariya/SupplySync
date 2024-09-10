@@ -54,7 +54,7 @@ const AccountDetails = () => {
         }).then(() => {
             console.log("Profile updated successfully!");
             storeAdditionalUserInfo
-            // router.push("/dashboard")
+            router.push("/dashboard")
         }).catch((error) => {
             console.error("Error updating profile:", error.message);
         });
