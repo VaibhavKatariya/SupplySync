@@ -7,6 +7,7 @@ import HeroSection from "./components/HeroSection";
 import Products from "./components/Products";
 import { auth } from "./firebase/config";
 import { useAuthState } from "react-firebase-hooks/auth";
+import PricingTable from "./components/PricingTable";
 
 export default function Home() {
   const [user, loading] = useAuthState(auth)
@@ -25,6 +26,7 @@ export default function Home() {
       <main>
       <HeroSection />
       <Products />
+      <PricingTable/>
       <Contact />
       </main>
       <Footer />

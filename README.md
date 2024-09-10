@@ -2,32 +2,38 @@
 
 A full-stack web application that allows users to efficiently manage product inventories. This project includes features such as user authentication, stock management, and product tracking. Built as part of the Google Developer Student Club (GDSC) selection process at Jaypee Institute of Information Technology.
 
-## 🚀 Demo
-You can view the live demo here: [Link to Demo](#)
+## 🔗Links
+- **GitHub Repository:** [repo link](https://github.com/VaibhavKatariyaa/SupplySync)
+- **Demo:** 🚀
+  - [Netlify](https://supplysync.netlify.app/)
+  - [Vercel](https://supplysync-gdsc.vercel.app/)
+
+
 
 ## 🛠 Features
-- User Authentication (Sign up, Login)
+- User Authentication (Sign up, Login, Delete, Update Password)
 - Add, Edit, Delete, and View Products
 - Manage stock levels
 - Responsive design with Tailwind CSS
-- Secure and scalable with Firebase Authentication and Firestore
+- Secure and scalable with Firebase Authentication and Firestore Database
 
 ## 🔧 Tech Stack
 - **Frontend**: 
-  - Next.js
+  - Next.js (Server-side rendering, Routing)
   - Tailwind CSS
 - **Backend**: 
+  - Next.js (for creating custom backend APIs)
   - Firebase Authentication
   - Firestore (NoSQL Database)
 - **State Management**: React Hooks
-- **Deployment**: Vercel
+- **Deployment**: Vercel & Netlify
 
 ## 📦 Tools Used
-- **Vercel**: For deployment
-- **Firebase**: For authentication and database
-- **Git & GitHub**: For version control
-- **Postman**: API testing
 - **Next.js**: For server-side rendering and routing
+- **Git & GitHub**: For version control
+- **Firebase**: For authentication and database
+- **Postman**: API testing
+- **Vercel & Netlify**: For deployment
 
 ## ⚙️ Setup & Installation
 
@@ -64,3 +70,4 @@ npm run dev
 
 ## 📜 License
 - This project is licensed under the MIT License.
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)

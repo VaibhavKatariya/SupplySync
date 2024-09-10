@@ -11,11 +11,10 @@ function Page() {
                     <div className="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
                         <div className="w-full sm:p-4 px-4 mb-6">
                             <h1 className="title-font font-medium text-xl mb-2 text-white-900">
-                                Moon hashtag pop-up try-hard offal truffaut
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             </h1>
                             <div className="leading-relaxed">
-                                Pour-over craft beer pug drinking vinegar live-edge gastropub, keytar
-                                neutra sustainable fingerstache kickstarter.
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores, accusantium quos ratione harum eligendi maiores dolores error animi dolor. Maiores incidunt perspiciatis reprehenderit aperiam doloribus.
                             </div>
                         </div>
                         <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">

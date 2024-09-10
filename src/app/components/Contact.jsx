@@ -64,11 +64,11 @@ function Contact() {
                         </div>
                     </form>
                     <div className="p-2 w-full pt-8 mt-8 border-t border-gray-700 text-center">
-                        <a className="text-indigo-500">contact@SupplySync.com</a>
+                        <a className="text-indigo-500">lorem@ipsum.com</a>
                         <p className="leading-normal my-5 text-gray-400">
-                            49 Smith St.
+                            32 Lorem Street
                             <br />
-                            Saint Cloud, MN 56301
+                            Lorem ipsum dolor sit amet consectetur.
                         </p>
                         <span className="inline-flex">
                             <a className="text-gray-500">

@@ -12,7 +12,7 @@ function HeroSecction() {
             <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
                 <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
                     <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-900">Streamline Your Inventory
-                        <br className="hidden lg:inline-block" />with Our Advanced System
+                        <br className="hidden lg:inline-block" /> with Our Advanced System
                     </h1>
                     <p className="mb-8 leading-relaxed">Efficiently manage your stock with our cutting-edge inventory system. Track products, monitor stock levels, and optimize your supply chain with ease. Simplify your operations and stay ahead of the curve with real-time updates and intuitive controls.</p>
                     <div className="flex justify-center">
