@@ -9,7 +9,7 @@ import "./account.modules.css"
 import { IconFidgetSpinner } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 
-const accountDetails = () => {
+const AccountDetails = () => {
 
     const [user, loading] = useAuthState(auth);
     const [name, setName] = useState("")
@@ -98,4 +98,4 @@ const accountDetails = () => {
     );
 };
 
-export default accountDetails;
+export default AccountDetails;

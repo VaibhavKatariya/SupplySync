@@ -10,7 +10,7 @@ import { IconFidgetSpinner } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import { doc, setDoc } from 'firebase/firestore';
 
-const accountDetails = () => {
+const AccountDetails = () => {
 
     const [user, loading] = useAuthState(auth);
     const [name, setName] = useState("")
@@ -114,4 +114,4 @@ const accountDetails = () => {
     );
 };
 
-export default accountDetails;
+export default AccountDetails;

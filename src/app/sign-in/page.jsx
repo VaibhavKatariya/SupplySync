@@ -101,7 +101,7 @@ const SignIn = () => {
             </button>
             <div className='p-2'>
               <Link legacyBehavior href="/sign-up">
-                <a>Don't have an Account? 
+                <a>Don&apos;t have an Account? 
                   <span className='text-blue-300 cursor-pointer'> Sign up </span></a>
               </Link> <br />or
               <Link legacyBehavior href="/">

@@ -1,4 +1,4 @@
-# Inventory Management System
+# SupplySync - An Inventory Management System
 
 A full-stack web application that allows users to efficiently manage product inventories. This project includes features such as user authentication, stock management, and product tracking. Built as part of the Google Developer Student Club (GDSC) selection process at Jaypee Institute of Information Technology.
 

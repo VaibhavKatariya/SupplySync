@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-function page() {
+function Page() {
     return (
         <>
         <Header page="about"/>
@@ -49,4 +49,4 @@ function page() {
     )
 }
 
-export default page
+export default Page

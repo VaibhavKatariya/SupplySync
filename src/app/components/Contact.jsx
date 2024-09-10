@@ -9,7 +9,7 @@ function Contact() {
                         Contact Us
                     </h1>
                     <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-400">
-                        We'd love to hear from you! Reach out to us for any queries or feedback
+                        We&apos;d love to hear from you! Reach out to us for any queries or feedback
                         regarding our inventory system.
                     </p>
                 </div>
