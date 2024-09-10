@@ -2,11 +2,18 @@
 import Link from "next/link"
 import { auth } from "../firebase/config"
 import {useAuthState, useSignOut} from "react-firebase-hooks/auth"
+import { useRouter } from 'next/navigation'
 
 
 function Header({ page }) {
     const [user, loading] = useAuthState(auth)
     const [signOut] = useSignOut(auth);
+    const router = useRouter();
+
+    const handelSignOut = ()=>{
+        signOut();
+        router.push("/sign-in")
+    }
 
     return (
         <header className="text-600 body-font">
@@ -26,7 +33,7 @@ function Header({ page }) {
                         {page === "accountDetails" ? (<Link legacyBehavior href="/dashboard"><a className="mr-5 hover:text-900 cursor-pointer">Dashboard</a></Link>) : ""}
                 </nav>
                 {page === "logout" || user ? (
-                    <button onClick={signOut} className="inline-flex items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base mt-4 md:mt-0 mr-2">LogOut
+                    <button onClick={handelSignOut} className="inline-flex items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base mt-4 md:mt-0 mr-2">LogOut
                     </button>
                 ) : ""}
 
