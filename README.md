@@ -39,7 +39,7 @@ A full-stack web application that allows users to efficiently manage product inv
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/username/repository.git
+git clone https://github.com/VaibhavKatariya/SupplySync.git
 ```
 2. Install dependencies:
 ``` bash
