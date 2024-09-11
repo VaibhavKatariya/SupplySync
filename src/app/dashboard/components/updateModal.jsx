@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 
-const UpdateModal = ({ isOpen, closeModal, product, onUpdate }) => {
+const UpdateModal = ({ isOpen, closeModal, product, onUpdate, user }) => {
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState(0);
@@ -37,6 +37,10 @@ const UpdateModal = ({ isOpen, closeModal, product, onUpdate }) => {
   const confirmDelete = async () => {
     await fetch(`/api/deleteProduct/${product.id}`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${await user.getIdToken()}`,
+      }
     });
     onUpdate(); // Refresh the product list
     setIsConfirmDeleteOpen(false); // Close confirmation modal

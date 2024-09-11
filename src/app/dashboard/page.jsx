@@ -103,7 +103,7 @@ function Page() {
       <div className="min-h-screen bg-[#1f2937] text-white rounded-md">
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold mb-6">Product Dashboard</h1>
-          <p className='p-2'>Hi {user.displayName}! Here is a list of your products:</p>
+          <p className='p-2'>Hi {user.email}! Here is a list of your products:</p>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
             onClick={openAddModal}
@@ -135,6 +135,7 @@ function Page() {
           closeModal={closeUpdateModal} 
           product={currentProduct} 
           onUpdate={handleProductUpdate} 
+          user={user}
         />
       )}
       <Footer />

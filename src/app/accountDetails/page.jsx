@@ -61,7 +61,7 @@ const AccountDetails = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         className="name-input w-full p-3 mb-4 bg-gray-700 rounded outline-none text-white placeholder-gray-500"
-                        minLength={5} maxLength={15}
+                        minLength={5}
                     />
                     <span className='error-message name-error-message'>name must be atleast 5 char long</span>
 
