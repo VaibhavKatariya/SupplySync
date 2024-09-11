@@ -1,12 +1,39 @@
+import { IconFidgetSpinner } from '@tabler/icons-react';
 import React, { useState } from 'react';
 
 const AddModal = ({ isOpen, closeModal, user, onAdd }) => {
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [price, setPrice] = useState(0);
-  const [stock, setStock] = useState(0);
+  const [price, setPrice] = useState('');
+  const [stock, setStock] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleAddProduct = async () => {
+    setLoading(true);
+    setError('');
+
+    // Convert price and stock to appropriate types
+    const parsedPrice = parseFloat(price);
+    const parsedStock = parseInt(stock);
+
+    // Validation
+    if (!name || !category || !price || !stock) {
+      setError('All fields are required.');
+      setLoading(false);
+      return;
+    }
+    if (parsedPrice <= 0) {
+      setError('Price must be greater than 0.');
+      setLoading(false);
+      return;
+    }
+    if (parsedStock <= 0) {
+      setError('Stock must be greater than 0.');
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch('/api/addProducts', {
         method: 'POST',
@@ -17,8 +44,8 @@ const AddModal = ({ isOpen, closeModal, user, onAdd }) => {
         body: JSON.stringify({
           name,
           category,
-          price: parseFloat(price),
-          stock: parseInt(stock),
+          price: parsedPrice,
+          stock: parsedStock,
         }),
       });
 
@@ -32,13 +59,15 @@ const AddModal = ({ isOpen, closeModal, user, onAdd }) => {
         onAdd();
         setName('');
         setCategory('');
-        setPrice(0);
-        setStock(0);
+        setPrice('');
+        setStock('');
+        setLoading(false);
       }
 
       closeModal(); // Close modal after adding product
     } catch (error) {
       console.error('Error adding product:', error);
+      setError('An error occurred while adding the product.');
     }
   };
 
@@ -85,6 +114,7 @@ const AddModal = ({ isOpen, closeModal, user, onAdd }) => {
               onChange={(e) => setStock(e.target.value)}
             />
           </div>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
           <div className="flex justify-end space-x-4">
             <button
               type="button"
@@ -96,9 +126,9 @@ const AddModal = ({ isOpen, closeModal, user, onAdd }) => {
             <button
               type="button"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={handleAddProduct}
+              onClick={handleAddProduct} disabled={loading}
             >
-              Add Product
+              {loading ? <IconFidgetSpinner className='animate-spin w-6 h-6 mx-auto' /> : "Add Product"}
             </button>
           </div>
         </form>

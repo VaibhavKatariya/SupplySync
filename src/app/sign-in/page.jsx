@@ -25,7 +25,7 @@ const SignIn = () => {
     }
   }, [stateUser, router]);
 
-  const isEmailValid = email.endsWith('@mail.jiit.ac.in');
+  const isEmailValid = email.endsWith('@gmail.com');
   const isPasswordValid = password.length >= 6 && password.length <= 20;
 
   const handleSignIn = async (e) => {
@@ -33,7 +33,7 @@ const SignIn = () => {
 
     setError("");
     if (!isEmailValid) {
-      setError('Please use a valid @mail.jiit.ac.in email address.');
+      setError('Please use a valid @gmail.com email address.');
       return;
     }
     if (!isPasswordValid) {
@@ -100,7 +100,7 @@ const SignIn = () => {
                 className="w-full p-3 bg-indigo-600 rounded text-white hover:bg-indigo-500"
                 disabled={loading}
               >
-                {loading ? 'Signing in...' : 'Sign In'}
+                {loading ? <IconFidgetSpinner className='animate-spin w-6 h-6 mx-auto' /> : 'Sign In'}
               </button>
             </form>
             <div className='p-2'>
@@ -108,7 +108,7 @@ const SignIn = () => {
                 <a>Don&apos;t have an Account? 
                   <span className='text-blue-300 cursor-pointer'> Sign up </span></a>
               </Link> <br />or
-              <Link legacyBehavior href="/">
+              <Link legacyBehavior href="/resetPass">
                 <a className='text-blue-300'> Reset your Password</a>
               </Link>
             </div>

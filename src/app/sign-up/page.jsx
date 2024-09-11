@@ -32,14 +32,14 @@ const SignUp = () => {
     }
   }, [stateUser, router]);
 
-  const isEmailValid = email.endsWith('@mail.jiit.ac.in');
+  const isEmailValid = email.endsWith('@gmail.com');
   const isPasswordValid = password.length >= 6 && password.length <= 20;
 
   const handleSignUp = async (e) => {
     e.preventDefault();
     setError("");
     if (!isEmailValid) {
-      setError('Please use a valid @mail.jiit.ac.in email address.');
+      setError('Please use a valid @gmail.com email address.');
       return;
     }
     if (!isPasswordValid) {
@@ -111,13 +111,13 @@ const SignUp = () => {
                 className="w-full p-3 bg-indigo-600 rounded text-white hover:bg-indigo-500"
                 disabled={loading}
               >
-                {loading ? 'Signing Up...' : 'Sign Up'}
+                {loading ? <IconFidgetSpinner className='animate-spin w-6 h-6 mx-auto' /> : 'Sign Up'}
               </button>
             </form>
             <div className='p-2 text-center'>
               Already have an Account?
               <Link legacyBehavior href="/sign-in">
-                <p className='text-blue-300'> sign in</p>
+                <p className='cursor-pointer text-blue-300'> sign in</p>
               </Link>
             </div>
             <p className='p-2 text-red-500'>{error}</p>

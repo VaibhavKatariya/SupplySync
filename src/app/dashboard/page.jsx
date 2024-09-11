@@ -20,6 +20,11 @@ function Page() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
+  const [customLoading, setCustomLoading] = useState(true);
+
+  useEffect(() => {
+    setCustomLoading(loading);
+  }, [loading]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -86,7 +91,7 @@ function Page() {
     await refreshProducts();
   };
 
-  if (loading || isLoadingProducts) {
+  if (customLoading || loading || isLoadingProducts) {
     return (
       <>
         <Header page="home" />
@@ -103,7 +108,7 @@ function Page() {
       <div className="min-h-screen bg-[#1f2937] text-white rounded-md">
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold mb-6">Product Dashboard</h1>
-          <p className='p-2'>Hi {user.email}! Here is a list of your products:</p>
+          <p className='p-2'>Hi {user?.displayName || "user"}! ({user?.email || "email"}), Here is a list of your products:</p>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
             onClick={openAddModal}

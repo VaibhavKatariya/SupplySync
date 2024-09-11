@@ -12,5 +12,4 @@ if (!admin.apps.length) {
 }
 
 const firestoreAdmin = admin.firestore();
-firestoreAdmin.settings({ preferRest: true });
 export { firestoreAdmin };
