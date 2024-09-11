@@ -12,8 +12,8 @@ import { useRouter } from 'next/navigation';
 const AccountDetails = () => {
 
     const [user, loading] = useAuthState(auth);
-    const [name, setName] = useState("")
-    const [uid, setUid] = useState("")
+    const [name, setName] = useState(" ")
+    const [uid, setUid] = useState(" ")
     const router = useRouter();
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const AccountDetails = () => {
 
     const handleProfileUpdate = async (e) => {
         e.preventDefault();
-        if (name === "") {
+        if (name === " ") {
             alert("Fields cannot be empty");
             return;
         }
@@ -54,7 +54,7 @@ const AccountDetails = () => {
             <Header button="home" />
             <div className="min-h-screen flex items-center justify-center bg-gray-900">
                 <div className="bg-gray-800 p-10 rounded-lg shadow-xl w-96">
-                    <p className="text-base text-white text-2xl mb-5">What should we call you? <br /> Definitely not <em>"{user?.email}"</em>, right? :)</p>
+                    <p className="text-base text-white text-2xl mb-5">What should we call you? <br /> Definitely not <em>&quot;{user?.email}&quot;</em>, right? :)</p>
                     <form>
                     <input
                         required
