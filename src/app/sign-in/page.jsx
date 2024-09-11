@@ -25,7 +25,7 @@ const SignIn = () => {
     }
   }, [stateUser, router]);
 
-  const isEmailValid = email.endsWith('@gmail.com');
+  const isEmailValid = email.endsWith('@gmail.com') || email.endsWith('@kaily.in');
   const isPasswordValid = password.length >= 6 && password.length <= 20;
 
   const handleSignIn = async (e) => {
@@ -33,7 +33,7 @@ const SignIn = () => {
 
     setError("");
     if (!isEmailValid) {
-      setError('Please use a valid @gmail.com email address.');
+      setError('Please use a valid @gmail.com or @kaily.in email address.');
       return;
     }
     if (!isPasswordValid) {
