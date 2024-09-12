@@ -17,11 +17,25 @@ const SignIn = () => {
   const [error, setError] = useState();
   const [signInWithEmailAndPassword, user, loading, firebaseError] = useSignInWithEmailAndPassword(auth);
   const [stateUser, stateLoading] = useAuthState(auth);
+  const [checkingVerification, setCheckingVerification] = useState(false); // To show spinner during verification check
   const router = useRouter();
 
   useEffect(() => {
+    const checkEmailVerification = async () => {
+      if (stateUser) {
+        setCheckingVerification(true); // Start spinner for verification check
+        await stateUser.reload(); // Reload user data to check verification status
+        if (stateUser.emailVerified) {
+          router.push('/dashboard'); // Redirect to dashboard if email is verified
+        } else {
+          router.push('/verifyEmail'); // Redirect to verify email if not verified
+        }
+        setCheckingVerification(false); // Stop spinner
+      }
+    };
+
     if (stateUser) {
-      router.push('/dashboard');
+      checkEmailVerification();
     }
   }, [stateUser, router]);
 
@@ -55,7 +69,7 @@ const SignIn = () => {
     }
   }, [firebaseError]);
 
-  if (stateLoading || loading) {
+  if (stateLoading || loading || checkingVerification) {
     return (
       <>
         <Header button="home" />

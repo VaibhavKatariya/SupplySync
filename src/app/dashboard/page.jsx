@@ -21,14 +21,35 @@ function Page() {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [customLoading, setCustomLoading] = useState(true);
+  const [checkingVerification, setCheckingVerification] = useState(true); // New state for verification checking
 
   useEffect(() => {
     setCustomLoading(loading);
   }, [loading]);
 
+  // Check if user is verified and handle redirection
+  useEffect(() => {
+    const checkEmailVerification = async () => {
+      if (user) {
+        await user.reload(); // Reload user data to get the latest email verification status
+        if (!user.emailVerified) {
+          router.push('/verifyEmail'); // Redirect to email verification page if not verified
+        } else {
+          setCheckingVerification(false); // Stop checking if user is verified
+        }
+      }
+    };
+
+    if (!loading && user) {
+      checkEmailVerification();
+    } else if (!loading && !user) {
+      router.push('/sign-in'); // Redirect to sign-in if no user is logged in
+    }
+  }, [user, loading, router]);
+
   useEffect(() => {
     const fetchProducts = async () => {
-      if (user) {
+      if (user && user.emailVerified) {
         const userId = user.uid;
         const productsRef = collection(db, `products/${userId}/userProducts`);
         const q = query(productsRef);
@@ -44,16 +65,10 @@ function Page() {
       }
     };
 
-    if (user) {
+    if (user && user.emailVerified) {
       fetchProducts();
     }
   }, [user]);
-
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push('/sign-in');
-    }
-  }, [loading, user, router]);
 
   const openAddModal = () => {
     setIsAddModalOpen(true);
@@ -91,7 +106,7 @@ function Page() {
     await refreshProducts();
   };
 
-  if (customLoading || loading || isLoadingProducts) {
+  if (customLoading || loading || isLoadingProducts || checkingVerification) {
     return (
       <>
         <Header page="home" />
