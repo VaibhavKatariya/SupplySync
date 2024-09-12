@@ -11,7 +11,7 @@ A full-stack web application that allows users to efficiently manage product inv
 
 
 ## 🛠 Features
-- User Authentication (Sign up, Login, Delete, Update Password)
+- User Authentication (Sign up, Login, Delete, Update Password, Reset Password)
 - Add, Edit, Delete, and View Products
 - Manage stock levels
 - Responsive design with Tailwind CSS
@@ -53,6 +53,9 @@ NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
 NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-storage-bucket
 NEXT_PUBLIC_FIREBASE_MESSAGING_ID=your-messaging-sender-id
 NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
+FIREBASE_PROJECT_ID=your-project-id
+FIREBASE_PRIVATE_KEY=your-base64-encoded-private-key
+FIREBASE_CLIENT_EMAIL=your-client-email
 ```
 4. Run the development server:
 ```bash
