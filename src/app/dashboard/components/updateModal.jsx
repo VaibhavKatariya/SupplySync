@@ -97,15 +97,6 @@ const UpdateModal = ({ isOpen, closeModal, product, onUpdate, user }) => {
           <h2 className="text-2xl font-bold text-white mb-4">Update Product</h2>
           <form>
             <div className="mb-4 cursor-not-allowed">
-              <label className="block text-white text-sm font-bold mb-2">Created At</label>
-              <input
-                type="text"
-                className="cursor-not-allowed w-full p-2 rounded bg-gray-700 text-white"
-                value={new Date(Number(product?.createdAt)).toString()}
-                disabled // Disable editing
-              />
-            </div>
-            <div className="mb-4 cursor-not-allowed">
               <label className="block text-white text-sm font-bold mb-2">Product Name</label>
               <input
                 type="text"
