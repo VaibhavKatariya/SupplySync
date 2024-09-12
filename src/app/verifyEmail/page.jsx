@@ -69,7 +69,7 @@ const VerifyEmail = () => {
     const checkVerificationStatus = async () => {
         try {
             setCheckingVerification(true); // Show "Checking..." on button
-            await auth.currentUser.reload(); // Refresh user's state
+            await auth.currentUser.reload(); 
             if (auth.currentUser.emailVerified) {
                 setIsVerified(true);
                 router.push('/dashboard');
@@ -109,7 +109,7 @@ const VerifyEmail = () => {
             ) : (
                 <>
                     <p className="mb-4">
-                        Please click the button below to send a verification email to your inbox. Once your email is verified, you'll gain access to the dashboard.
+                        Please click the button below to send a verification email to your inbox. Once your email is verified, you&apos;ll gain access to the dashboard.
                     </p>
 
                     {attempts >= 2 ? (
