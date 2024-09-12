@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 import "./account.modules.css";
 import { IconFidgetSpinner, IconEye, IconEyeOff } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
+import { getFirestore, collection, doc, deleteDoc, getDocs } from "firebase/firestore";
+import Link from 'next/link';
 
 const errorMessages = {
     'auth/invalid-email': 'Invalid email address.',
@@ -87,15 +89,36 @@ const AccountDetails = () => {
         if (user) {
             setDeleteLoading(true);
             try {
+                const db = getFirestore(); // Initialize Firestore
+                const userId = user.uid;
+    
+                // Reference to the user's products collection
+                const productsRef = collection(db, `products/${userId}/userProducts`);
+                const productsSnapshot = await getDocs(productsRef);
+    
+                // Delete all products documents in the user's collection
+                const deletePromises = productsSnapshot.docs.map((productDoc) =>
+                    deleteDoc(doc(db, `products/${userId}/userProducts`, productDoc.id))
+                );
+    
+                // Delete the user document from the 'users' collection (if applicable)
+                const userDocRef = doc(db, 'users', userId);
+                deletePromises.push(deleteDoc(userDocRef));
+    
+                // Wait for all deletions to complete
+                await Promise.all(deletePromises);
+    
+                // Delete Firebase user account
                 await deleteUser(user);
-                alert("Account deleted successfully");
+                alert("Account and data deleted successfully");
                 router.push("/sign-in");
             } catch (error) {
-                console.error("Error deleting account:", error.message);
+                console.error("Error deleting account and data:", error.message);
                 setDeleteLoading(false);
             }
         }
     };
+
 
     const handleResetPassword = async () => {
         setError('');
@@ -148,6 +171,8 @@ const AccountDetails = () => {
                         value={email}
                         className="cursor-not-allowed name-input w-full p-3 mb-4 bg-gray-700 rounded outline-none text-white placeholder-gray-500"
                     />
+
+                    {auth?.currentUser?.emailVerified ? (<nav className='text-green-500'>Email is verified</nav>) : (<nav className='text-red-500'>Email is not verified <Link href="/verifyEmail" className='underline'>Verify now</Link> </nav>)}
 
                     {hasChanges && (
                         <button
