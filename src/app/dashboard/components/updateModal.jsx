@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 const UpdateModal = ({ isOpen, closeModal, product, onUpdate, user }) => {
   const [price, setPrice] = useState('');
   const [stock, setStock] = useState('');
+  const [initialPrice, setInitialPrice] = useState('');
+  const [initialStock, setInitialStock] = useState('');
   const [isConfirmDeleteOpen, setIsConfirmDeleteOpen] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [error, setError] = useState('');
@@ -14,6 +16,8 @@ const UpdateModal = ({ isOpen, closeModal, product, onUpdate, user }) => {
     if (product) {
       setPrice(product.price || '');
       setStock(product.stock || '');
+      setInitialPrice(product.price || '');
+      setInitialStock(product.stock || '');
     }
   }, [product]);
 
@@ -86,7 +90,11 @@ const UpdateModal = ({ isOpen, closeModal, product, onUpdate, user }) => {
 
   const cancelDelete = () => {
     setIsConfirmDeleteOpen(false); // Close confirmation modal
+    closeModal(); // Close the update modal
   };
+
+  // Check if the price or stock has been changed
+  const isUpdateDisabled = price === initialPrice && stock === initialStock;
 
   if (!isOpen) return null;
 
@@ -133,7 +141,7 @@ const UpdateModal = ({ isOpen, closeModal, product, onUpdate, user }) => {
               />
             </div>
             {error && <p className="text-red-500 mb-4">{error}</p>}
-            <div className="flex justify-end space-x-4">
+            <div className="flex flex-col space-y-4">
               <button
                 type="button"
                 className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
@@ -143,8 +151,9 @@ const UpdateModal = ({ isOpen, closeModal, product, onUpdate, user }) => {
               </button>
               <button
                 type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${isUpdateDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                 onClick={handleUpdate}
+                disabled={isUpdateDisabled}
               >
                 {loading ? <IconFidgetSpinner className='animate-spin w-6 h-6 mx-auto' /> : "Update Product"}
               </button>

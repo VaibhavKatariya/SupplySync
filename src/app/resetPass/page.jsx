@@ -15,6 +15,7 @@ const ForgotPassword = () => {
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
     const router = useRouter();
+    const [disabled, setDisabled] = useState(false);
 
     useEffect(() => {
         if (stateUser) {
@@ -57,6 +58,7 @@ const ForgotPassword = () => {
         try {
             await sendPasswordResetEmail(auth, email);
             setMessage("Password reset email sent successfully. Please check your inbox.");
+            setDisabled(true);
             setTimeout(() => router.push("/sign-in"), 5000); // Redirect to sign-in page after 5 seconds
         } catch (error) {
             console.log(error)
@@ -94,10 +96,10 @@ const ForgotPassword = () => {
                     <button
                         type="submit"
                         onClick={handleSendResetEmail}
-                        className={`w-full p-3 ${loading ? 'bg-gray-500' : 'bg-indigo-600'} rounded text-white hover:bg-indigo-500`}
-                        disabled={loading}
+                        className={`w-full p-3 ${loading || disabled ? 'bg-gray-500' : 'bg-indigo-600'} rounded text-white ${loading || disabled ? 'hover:bg-gray-500' : 'hover:bg-indigo-500'}`}
+                        disabled={loading || disabled}
                     >
-                        {loading ? <IconFidgetSpinner className='animate-spin w-6 h-6 mx-auto' /> : 'Send Reset Link'}
+                        {loading ? <IconFidgetSpinner className='animate-spin w-6 h-6 mx-auto' /> : disabled ? "redirecting..." : "Send Reset Link"}  
                     </button>
                     </form>
                 </div>
