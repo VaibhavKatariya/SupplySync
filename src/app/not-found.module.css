@@ -1,0 +1,26 @@
+.main {
+    background-color: #0a0a0a;
+    color: #ededed;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  .p {
+    font-size: 1.5rem;
+  }
+  .a {
+    color: #00c3ff;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+  .a:hover {
+    color: #1abc9c;
+  }
