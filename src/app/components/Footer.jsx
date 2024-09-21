@@ -11,7 +11,7 @@ function Footer() {
                     <span class="ml-3 text-xl">SupplySync</span>
                 </a>
                 <p class="text-sm text-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">&copy; {new Date().getFullYear()} SupplySync — made with ♥️ by
-                    <a href="https://github.com/VaibhavKatariyaa/" class="text-600 ml-1" rel="noopener noreferrer" target="_blank">@VaibhavKatariya</a>
+                    <a href="https://github.com/VaibhavKatariya/" class="text-600 ml-1" rel="noopener noreferrer" target="_blank">@VaibhavKatariya</a>
                 </p>
                 <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
                     <a href='#' class="text-500">
