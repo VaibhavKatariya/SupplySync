@@ -69,7 +69,7 @@ npm run dev
 - Responsive Design: The app is optimized for both mobile and desktop use.
 
 ## 👨‍💻 Contributors
-- Vaibhav Katariya - [GitHub](https://github.com/VaibhavKatariyaa)
+<a href="https://github.com/VaibhavKatariya/SypplySync/graphs/contributors"><img src="https://contributors-img.firebaseapp.com/image?repo=VaibhavKatariya/SupplySync" alt="Image of contributors"></a>
 
 ## 📜 License
 - This project is licensed under the MIT License.
